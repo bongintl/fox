@@ -1,0 +1,41 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    width: calc( 100% - 3rem );
+    height: 100%;
+    transition: transform .3s;
+    z-index: 500;
+    background-color: $off-white;
+    @include medium {
+        padding: 0;
+        width: calc( 100% - 8rem );
+    }
+    @include tablet-landscape {
+        max-width: 25rem;
+    }
+    &--left {
+        left: 0;
+        transform: translateX( -100% );
+        .sidebar__close {
+            left: 0;
+        }
+    }
+    &--right {
+        right: 0;
+        transform: translateX( 100% );
+        .sidebar__close {
+            right: 0;
+        }
+    }
+    &--open {
+        transform: none;
+    }
+    &__close {
+        z-index: 50;
+        cursor: pointer;
+        line-height: 1;
+        position: absolute;
+        padding: 1.2rem 1.5rem 1rem 2rem;
+        font-size: 2em;
+    }
+}

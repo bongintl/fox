@@ -1,0 +1,23 @@
+{% extends '_layout' %}
+{% block content %}
+    <div class="row">
+        {% set collectionIDs = [] %}
+        {% for block in entry.sales %}
+            {% set collectionIDs = collectionIDs | merge([ block.collection ]) %}
+        {% endfor %}
+        {% set collections = craft.shopify.getCollections({ ids: collectionIDs | join(',') }) | index_by('id') %}
+        {% set collectionIndex = 0 %}
+        {% for block in entry.sales %}
+            {% if collections[ block.collection ] is defined %}
+                {% set collection = collections[ block.collection ] %}
+                {% set color = collectionIndex % 2 == 0 ? 'dark-teal-yellow' : 'yellow-warm-grey' %}
+                {% include 'partials/collection' with { collection: collection, color: color } %}
+                {% set collectionIndex = collectionIndex + 1 %}
+            {% elseif currentUser %}
+                <div class="s-col-12">
+                    <h2>Bad collection in Sales</h2>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

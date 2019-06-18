@@ -1,0 +1,117 @@
+{% extends '_layout' %}
+{% set productID = craft.request.getSegment( 2 ) %}
+{% set product = craft.shopify.getProductById({ id: productID }) %}
+{% if product == null %}{% exit 404 %}{% endif %}
+{% block content %}
+    <div class="panels">
+        <div class="panels__panel panels__panel--left fade-in">
+            <div class="product-images">
+                <div class="product-images__slides">
+                    {% for image in product.images %}
+                        <div class="product-images__slide">
+                            <img src="{{ image.src }}" alt="{{ image.alt }}">
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="product-images__count">
+                    <span class="product-images__index">1</span>/{{ product.images | length }}
+                </div>
+            </div>
+        </div>
+        <div class="panels__panel panels__panel--right fade-in">
+            <div class="product-description">
+                <h2 class="product-description__title">{{ product.title | italicise_lowercase | replace( '\n', '<br>' ) | raw }}</h2>
+                {% if product.variants | length %}
+                    <p class="product-description__price" data-display-currency="{{ product.variants[ 0 ].price }}"></p>
+                {% endif %}
+                <div class="product-description__body">
+                    {{ product.body_html | delete_tag('table') | raw }}
+                </div>
+                <div class="order--float-clear">
+                    <form class="order">
+                        <div class="order__wrap">
+                            <div class="order__header">
+                                <p>Select size</p>
+                                <a data-toggle-size-guide>Size guide</a>
+                            </div>
+                            <div class="order__sizes">
+                                {% for variant in product.variants %}
+                                    {% set outOfStock = variant.inventory_quantity == 0 %}
+                                    <div class="order__size">
+                                        <input type="radio" name="size" value="{{ product.id }}:{{ variant.id }}" id="{{ variant.id }}" {{ outOfStock ? 'disabled' : 'required' }}/>
+                                        <label for="{{ variant.id }}">{{ variant.title }}</label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <input type="submit" class="order__button" value="Add to bag" disabled>
+                    </form>
+                    <div class="accordions accordion--product">
+                        {% set rows = product.body_html | extract_tag('tr') %}
+                        {% if rows | length is even %}
+                            {% for row in rows %}
+                                {% if loop.index0 is even %}
+                                    <div class="accordion">
+                                {% endif %}
+                                {% if loop.index0 is even %}
+                                    <div class="accordion__title"><span>{{ row | raw | striptags }}</span></div>
+                                {% else %}
+                                    <div class="accordion__body">{{ row | raw }}</div>
+                                {% endif %}
+                                {% if loop.index0 is odd %}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            Error: Table has an odd number of rows. Must be even.
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% set collection = craft.request.getParam('collection') %}
+    {% set relatedProductHandles =
+        craft.shopify.getProductMetafields( productID )
+        | filter_by( 'namespace', 'sf_related_products' )
+        | pluck( 'value' )
+    %}
+    {% if collection or relatedProductHandles | length > 0 %}
+        <div class="row related-products">
+            {% for handle in relatedProductHandles %}
+                {% for product in craft.shopify.getProducts({ handle: handle, limit: 250 }) %}
+                    {% include 'partials/product-thumbnail' with { product: product, sizes: [ 6, 6, 3, 3 ] } %}
+                {% endfor %}
+            {% endfor %}
+            {% set count = relatedProductHandles | length %}
+            {% if collection and count < 4 %}
+                {% for product in craft.shopify.getProducts({ collection_id: collection, limit: 8 }) %}
+                    {% if count < 4 and product.handle not in relatedProductHandles %}
+                        {% include 'partials/product-thumbnail' with { product: product, sizes: [ 6, 6, 3, 3 ] } %}
+                        {% set count = count + 1 %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    {% endif %}
+    <div class="size-guide" data-toggle-size-guide>
+        <div class="size-guide__inner">
+            <div class="size-guide__header">
+                <p>Size Guide</p>
+                <div class="size-guide__close"><img src="/close.svg" alt=""></div>
+            </div>
+            <div class="size-guide__row">
+                <div class="size-guide__column">UK</div>
+                <div class="size-guide__column">US</div>
+                <div class="size-guide__column">EU</div>
+            </div>
+            {% for row in globals.sizeGuide %}
+                <div class="size-guide__row">
+                    <div class="size-guide__column">{{ row.uk }}</div>
+                    <div class="size-guide__column">{{ row.us }}</div>
+                    <div class="size-guide__column">{{ row.eu }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "_layout" %}
+{% set title = "Journal" %}
+
+{% block content %}
+	{% set perPage = 10 %}
+	{% set page = craft.request.getSegment( 2 ) - 1 %}
+	{% set count = craft.entries.section('journal').count() %}
+	{% set offset = perPage * page %}
+	{% if offset > count %}{% exit 404 %}{% endif %}
+	{% set next = offset + perPage < count ? page + 1 : null %}
+	<div class="pagination">
+		{% for entry in craft.entries.section('journal').limit( perPage ).offset( offset ) %}
+			{% include 'partials/journal' with { entry: entry, intro: entry.shortIntro } %}
+		{% endfor %}
+		{% if next != null %}
+			<a class="pagination__more ajax" href="/journal/{{ next + 1 }}">More posts</a>
+		{% endif %}
+	</div>
+{% endblock %}

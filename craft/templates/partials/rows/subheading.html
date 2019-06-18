@@ -1,0 +1,9 @@
+<div class="row row--margin row__subheading fade-in">
+    
+    <div class="s-col-12 l-col-6 l-off-3">
+        {% if row.subheadingLink != '' %}<a href="{{ row.subheadingLink }}">{% endif %}
+        <h2>{{ row.copy }}</h2>
+        {% if row.subheadingLink != '' %}</a>{% endif %}
+    </div>
+    
+</div>

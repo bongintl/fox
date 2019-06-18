@@ -1,0 +1,33 @@
+$white: #FFFFFF;
+$off-white: #F6F3F1;
+$green: #797F54;
+$warm-grey: #DACFC1;
+$dark-teal: #1B4A58;
+$yellow: #E68C1E;
+$black: #000000;
+
+$columns: 12;
+$gutter-small: 0;
+$gutter-medium: 0;
+$gutter-large: 0;
+
+$nav-height-small: 80px;
+$nav-height-medium: 95px;
+$nav-height-large: 110px;
+$viewport-height-small: calc(100vh - #{ $nav-height-small });
+$viewport-height-large: calc(100vh - #{ $nav-height-large });
+
+$text-small: 15px;
+$text-xsmall: 12px;
+$text-medium: 20px;
+
+$block-padding-small: 30px;
+$block-padding-medium: 50px;
+
+@function viewport-height-small ( $x: 1 ) {
+    @return calc( ( 100vh - #{ $nav-height-small } ) * #{ $x } );
+}
+
+@function viewport-height-large ( $x: 1 ) {
+    @return calc( ( 100vh - #{ $nav-height-large } ) * #{ $x } );
+}

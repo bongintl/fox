@@ -1,0 +1,50 @@
+.bag-item {
+    display: flex;
+    // padding: 0 .5rem;
+    flex-shrink: 0;
+    &__image {
+        width: 8rem;
+        height: 10.66666rem;
+        // padding: 1rem .5rem;
+        flex-shrink: 0;
+        img {
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    &__text {
+        padding: 1rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+    &__name {
+        flex-grow: 1;
+    }
+    &__details {
+        display: flex;
+        justify-content: space-between;
+    }
+    &__price {
+        flex-grow: 1;
+        text-align: right;
+    }
+    &__button {
+        padding: 0 .4rem;
+        cursor: pointer;
+        &:first-child {
+            margin-left: -.4rem;
+        }
+    }
+    &:nth-child(even) {
+        background: white;
+    }
+    &:nth-child(odd) {
+        background: $off-white;
+    }
+    @keyframes fade-in {
+        from { opacity: 0 }
+        to { opacity: 1 }
+    }
+    animation: fade-in .5s;
+}

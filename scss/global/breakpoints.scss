@@ -1,0 +1,15 @@
+@mixin small {
+    @media ( max-width: 767px ) { @content }
+}
+
+@mixin medium {
+    @media ( min-width: 768px ) { @content }
+}
+
+@mixin tablet-landscape {
+    @media ( min-width: 1024px ) { @content }
+}
+
+@mixin large {
+    @media ( min-width: 1200px ) { @content }
+}

@@ -1,0 +1,11 @@
+{% set intro = intro | default( entry.fullIntro ) %}
+<a class="s-col-12 m-col-6 l-col-6 m-h-portrait l-h-portrait {{ bem( 'journal__link', { 'has-intro': intro } ) }}" href="{{ entry.url }}">
+	<span class="journal__date">{{ entry.postDate.format('F d') }}</span>
+	<h4 class="journal__title">{{ entry.category.first() }} <em>{{ entry.title }}</em></h4>
+	<div class="journal__intro">
+		{{ intro }}
+	</div>
+	<div class="journal__read-more">
+		Read more
+	</div>
+</a>

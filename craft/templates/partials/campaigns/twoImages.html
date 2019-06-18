@@ -1,0 +1,12 @@
+{% if block.fileLeft | length %}
+    {% include 'partials/campaigns/small-image' with {
+        image: block.fileLeft.first(),
+        product: block.productLeft ? products[ block.productLeft ] : null
+    } %}
+{% endif %}
+{% if block.fileRight | length %}
+    {% include 'partials/campaigns/small-image' with {
+        image: block.fileRight.first(),
+        product: block.productRight ? products[ block.productRight ] : null
+    } %}
+{% endif %}

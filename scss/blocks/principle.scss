@@ -1,0 +1,62 @@
+.principle {
+    position: relative;
+    height: auto;
+
+    @include large {
+        & > div {
+            margin-left: 0;
+            height: $viewport-height-small;
+        }
+    }
+    
+    &__image {
+        display: none;
+        background-size: contain;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-position: center center;
+        @include large {
+            display: block;
+        }
+        &--mobile {
+            display: block;
+            margin-bottom: 60px;
+            // height: 125vw;
+            @include medium {
+                // height: 100vw;
+                // width: 80%;
+                // margin-left: 10%;
+            }
+            @include large {
+                display: none;
+            }
+        }
+    }
+    
+    &__text {
+        padding: 0 30px;
+        font-size: 15px;
+        @include large {
+            position: absolute;
+            text-align: center;
+            top: 50%;
+            left: 17.5%;
+            width: 65%;
+            transform: translateY(-50%);
+            font-size: 20px;
+        }
+    }
+    
+    &__heading {
+        margin-bottom: 1em;
+        font-size: 24px;
+        @include medium {
+            font-size: 30px;
+        }
+        
+        @include large {
+            font-size: 60px;
+        }
+    }
+    
+}

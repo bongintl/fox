@@ -1,0 +1,75 @@
+<nav class="nav">
+	<div class="nav__section nav__section--logo">
+	    <a href="/">{% include 'partials/logo.html' %}</a>
+    </div>
+	<div class="nav__section nav__section--left">
+		<div class="nav__mobile-item">
+			<a class="nav__menu-button" data-open-left-sidebar></a>
+		</div>
+	    <div class="nav__item dropdown">
+	        <a class="{{ bem('dropdown__title', { active: craft.request.firstSegment in [ 'shop', 'product' ] } ) }}" href="/shop">
+	        	Shop
+	        </a>
+	        <div class="dropdown__items">
+	            {% for collectionID in shopCollectionIDs if collectionID in shopCollections | keys %}
+	            	{% set collection = shopCollections[ collectionID ] %}
+					<div class="dropdown__item">
+						<a href="/shop#{{ collection.handle }}">
+    						{{ collection.title | capitalize }}
+    					</a>
+					</div>
+				{% endfor %}
+				{% if craft.entries.section('sales').first().sales | length %}
+					<div class="dropdown__item">
+						<a href="/sale">Sale</a>
+					</div>
+				{% endif %}
+				<div class="dropdown__item">&nbsp;</div>
+				<div class="dropdown__item">
+					<a href="/page/appointments">Appointments</a>
+				</div>
+	        </div>
+        </div>
+        <div class="nav__item dropdown">
+	        <a class="{{ bem('dropdown__title', { active: craft.request.firstSegment == 'campaign' } ) }}">Campaigns</a>
+	        <div class="dropdown__items">
+	            {% for campaign in campaigns %}
+	            	<div class="dropdown__item">
+	            		<a href="{{ campaign.url }}">{{ campaign.title }}</a>
+	            	</div>
+				{% endfor %}
+	        </div>
+	    </div>
+	    <div class="{{ bem('nav__item', { active: craft.request.firstSegment == 'journal' } ) }}">
+	    	<a href="/journal/1">Journal</a>
+	    </div>
+	    <div class="{{ bem('nav__item', { active: craft.request.getSegment( 2 ) == 'about' } ) }}">
+	    	<a href="/page/about">About</a>
+	    </div>
+	    <div class="{{ bem('nav__item', { active: craft.request.firstSegment == 'press' } ) }}">
+	    	<a href="/press">Press</a>
+	    </div>
+	    <div class="{{ bem('nav__item', { active: craft.request.firstSegment == 'insta-shop' } ) }}">
+	    	<a href="/insta-shop/1">Insta Shop</a>
+	    </div>
+	</div>
+	<div class="nav__section nav__section--right">
+	    <div class="nav__item dropdown dropdown--right">
+	        <a class="dropdown__title" data-display-currency-code></a>
+	        <div class="dropdown__items">
+	        	{% for row in globals.currencies %}
+	        		<div class="dropdown__item">
+						<a data-set-currency="{{ row.currency }}">{{ row.currency }}</a>
+					</div>
+	        	{% endfor %}
+	        </div>
+	    </div>
+	    <div class="nav__mobile-item">
+	    	<a data-open-right-sidebar><img src="/bag.svg" alt=""> <span class="bag-count">0</span></a>
+    	</div>
+	    <div class="nav__item">
+	    	<a data-open-right-sidebar><img src="/bag.svg" alt=""> <span>Bag</span> <span class="bag-count">0</span></a>
+    	</div>
+	</div>
+</nav>
+<div class="nav-trigger"></div>

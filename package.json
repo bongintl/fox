@@ -1,0 +1,43 @@
+{
+  "name": "base",
+  "version": "1.0.0",
+  "description": "",
+  "main": "js/main.js",
+  "scripts": {
+    "build-sass": "node-sass scss/style.scss style.css",
+    "watch-sass": "npm run build-sass && onchange 'scss/**/*' -- npm run build-sass",
+    "build-js": "browserify js/main.js -t [ babelify --presets [ env stage-2 ] ] | uglifyjs -c -m > bundle.js",
+    "build-js-test": "browserify js/main.js -t [ babelify --presets [ env stage-2 ] ] -o bundle.js",
+    "watch-js": "watchify js/main.js -o bundle.js -v",
+    "dev": "npm run watch-sass & npm run watch-js",
+    "build": "npm run build-sass && npm run build-js"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babelify": "^8.0.0",
+    "browserify": "^16.1.0",
+    "http-server": "^0.11.1",
+    "node-sass": "^4.7.2",
+    "onchange": "^3.3.0",
+    "uglify-es": "^3.3.9",
+    "watchify": "^3.10.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "currency-formatter": "^1.4.3",
+    "currency-symbol-map": "^4.0.4",
+    "fontfaceobserver": "^2.0.13",
+    "hyperscript": "^2.0.2",
+    "jquery": "^3.3.1",
+    "jquery-visible": "^1.2.0",
+    "js-cookie": "^2.2.0",
+    "lodash": "^4.17.10",
+    "masonry-layout": "^4.2.2",
+    "mithril": "^1.1.6",
+    "smoothscroll-polyfill": "^0.4.3"
+  }
+}

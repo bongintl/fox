@@ -1,0 +1,22 @@
+{% if block.file | length %}
+
+{% set url = "/product/" ~ block.product %}
+
+
+    <div>
+        {% if block.product != '' %}
+            <a href="{{ url }}">
+        {% endif %}
+        
+            {{ img( block.file.first ) }}
+
+        {% if block.product != ''  %}
+            </a>
+        {% endif %}
+        
+        
+        {% if block.product != '' %}
+            {% include 'partials/product-label' with { product: products[ block.product ], image: block.file.first } %}
+        {% endif %}
+    </div>
+{% endif %}

@@ -1,0 +1,22 @@
+.panels {
+    @include large {
+        display: flex;
+        align-items: flex-start;
+        margin-top: -$nav-height-large;
+        &__panel {
+            width: 50vw;
+            z-index: 10;
+            &--left {
+                &.is-stuck {
+                    left: 0;
+                }
+            }
+            &--right {
+                // min-height: 100vh;
+                &.is_stuck {
+                    right: 0;
+                }
+            }
+        }
+    }
+}

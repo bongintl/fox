@@ -1,0 +1,73 @@
+body {
+    font-family: "mabry-light-pro";
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+    font-family: 'orpheus-pro';
+    font-weight: normal;
+    text-align: center;
+    line-height: 1.1;
+    font-size: 33px;
+    
+    @include medium {
+        font-size: 52px;
+    }
+    @include large {
+        font-size: 75px;
+    }
+}
+
+h2 {
+    font-family: 'orpheus-pro';
+    font-weight: normal;
+    line-height: 1.1;
+    font-size: 45px;
+    
+    @include medium {
+        font-size: 30px;
+    }
+    
+    @include large {
+        font-size: 45px;
+    }
+}
+
+h3 {
+    font-family: 'orpheus-pro';
+    font-size: 1.5rem;
+    font-weight: normal;
+    line-height: 1;
+}
+
+h4 {
+    font-family: 'orpheus-pro';
+    font-size: 45px;
+    font-weight: normal;
+    line-height: 1;
+    text-align: center;
+}
+
+blockquote {
+    font-family: 'orpheus-pro';
+    font-size: 1.5rem;
+    font-style: italic;
+    line-height: 1.25;
+}
+
+p {
+    
+}
+
+.text-small {
+    font-size: 13px;
+    line-height: 1.46;
+    @include medium {
+        font-size: $text-small;
+    }
+}
+
+strong {
+    font-weight: 400;
+}

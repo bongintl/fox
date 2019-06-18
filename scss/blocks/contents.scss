@@ -1,0 +1,43 @@
+.contents {
+    display: none;
+    @include tablet-landscape {
+        display: block;
+        margin-bottom: 40px;
+    }
+    
+    @include large {
+        margin-bottom: 0;
+    }
+    
+    &__columns {
+        display: flex;
+        
+        @include medium {
+            margin-top: 40px;
+        }
+        @include large {
+            margin-top: 0;
+        }
+    }
+    &__column {
+        width: 50%;
+    }
+    &__item {
+        display: block;
+        text-align: center;
+        
+        span {
+            display:inline-block; 
+            border-bottom: 1px solid rgba(0,0,0,0);
+        }
+        
+        &:hover span {
+           
+            border-bottom: 1px solid black;
+        }
+    }
+    .docs__subheading {
+        margin-top: 0;
+        padding-top: 0;
+    }
+}

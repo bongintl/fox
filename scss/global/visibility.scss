@@ -1,0 +1,21 @@
+.s-hide {
+    display: none;
+}
+
+@include medium {
+    .m-show {
+        display: block;
+    }
+    .m-hide {
+        display: none;
+    }
+}
+
+@include large {
+    .l-show {
+        display: block;
+    }
+    .l-hide {
+        display: none;
+    }
+}

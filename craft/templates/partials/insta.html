@@ -1,0 +1,19 @@
+<{{ product ? 'a' : 'div' }}
+    class="s-col-{{ sizes[ 0 ] }} m-col-{{ sizes[ 1 ] }} tl-col-{{ sizes[ 2 ] }} l-col-{{ sizes[ 3 ] }} s-h-square m-h-square tl-h-square l-h-square fade-in"
+    {% if product %}href="/product/{{ product.id }}"{% endif %}
+>
+    {% if img %}
+        {{ img( img, [ sizes[ 0 ] / 12, sizes[ 1 ] / 12, sizes[ 2 ] / 12 ], { class: 'background-image' } ) }}
+    {% endif %}
+    {% if product %}
+        <div class="insta__overlay{% if class is defined %} insta__overlay--{{ class }}{% endif %}">
+            <div class="insta__text">
+                {{ product.title }}<br>
+                {% if product.variants | length %}
+                    <span data-display-currency="{{ product.variants[ 0 ].price }}"></span>
+                {% endif %}
+            </div>
+            <div class="insta__shop">SHOP</div>
+        </div>
+    {% endif %}
+</{{ product ? 'a' : 'div' }}>

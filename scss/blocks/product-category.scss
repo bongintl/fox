@@ -1,0 +1,103 @@
+.product-category {
+    // width: 50vw;
+    // max-height: viewport-height-small();
+    // height: 66.6666vw;
+    @include medium {
+        // height: viewport-height-small();
+    }
+    @include large {
+        // max-height: viewport-height-large();
+        // height: viewport-height-large();
+    }
+    &__title {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        text-align: center;
+        padding: 20px;
+        font-size: 27px;
+        @include medium {
+            bottom: auto;
+            top: 0;
+            font-size: 45px;
+            padding: 30px $block-padding-medium;
+        }
+        
+        @include large {
+            font-size: 75px;
+            padding: $block-padding-medium 100px;
+        }
+    }
+    &__image {
+        position: absolute;
+        display: none;
+        width: 80%;
+        top: 8em;
+        bottom: 8em;
+        left: 10%;
+        background-size: contain;
+        opacity: 0;
+        transition: opacity 1s 1s;
+        .fade-in--done & {
+            opacity: 1;
+        }
+        @include medium {
+            // top: 12%;
+            display: block;
+            top: 30px + 45px * 1.1 + 30px;
+            bottom: 30px + 13px * 1.1 + 30px;
+        }
+        @include large {
+            // top: 10%;
+            top: 50px + 75px * 1.1 + 50px;
+            bottom: 50px + 15px * 1.1 + 50px;
+        }
+    }
+    &__index {
+        position: absolute;
+        width: 100%;
+        display: none;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+        bottom: 0;
+        padding: 1rem;
+        text-align: center;
+        padding: $block-padding-small;
+        @include medium {
+            font-size: 13px;
+            display: block;
+            padding: 30px $block-padding-medium;
+        }
+        @include large {
+            font-size: 15px;
+            padding: $block-padding-medium;
+        }
+    }
+    &__title,
+    &__index {
+        opacity: 0;
+        transition: opacity 1s .5s;
+        .fade-in--done & {
+            opacity: 1;
+        }
+    }
+    &--green-warm-grey {
+        background: $green;
+        color: $warm-grey;
+    }
+    &--warm-grey-green {
+        background: $warm-grey;
+        color: $green;
+    }
+    &--dark-teal-yellow {
+        background: $dark-teal;
+        color: $yellow;
+    }
+    &--yellow-warm-grey {
+        background: $yellow;
+        color: $warm-grey;
+    }
+    &--warm-grey {
+        background: $warm-grey;
+    }
+}

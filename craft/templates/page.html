@@ -1,0 +1,19 @@
+{% extends "_layout" %}
+
+{% block content %}
+    
+    {% include "partials/sticky-header" with {
+        title: entry.heading,
+        margin: true,
+        assets: entry.headerImage | length > 0
+            ? [{ image: entry.headerImage.first, href: null }]
+            : []
+    } %}
+  
+{% set seg = craft.request.lastSegment %}
+
+    <div class="{% if seg != 'about' %}page{% endif %}">
+        {% include "partials/rows" with { rows : entry.rows } %}
+    </div>
+    
+{% endblock %}

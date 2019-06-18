@@ -1,0 +1,53 @@
+<footer class="footer fade-in">
+    <div class="footer__newsletter">
+        {% include 'partials/newsletter' %}
+    </div>
+    <ul class="footer__linklist">
+        <li><a href="/deliveries-and-returns">Delivery & Returns</a></li>
+        <li><a href="/terms-and-conditions">Terms & Conditions</a></li>
+        <li><a href="/privacy-policy">Privacy Policy</a></li>
+    </ul>
+    <ul class="footer__linklist">
+        <li><a href="/page/faq">FAQ</a></li>
+        <li><a href="/page/careers">Careers</a></li>
+        <li><a href="/page/contact">Contact</a></li>
+    </ul>
+    <ul class="footer__linklist">
+        <li><a href="{{ socialMedia.instagramLink }}" target="_blank">Instagram</a></li>
+        <li><a href="{{ socialMedia.facebookLink }}" target="_blank">Facebook</a></li>
+        <li><a href="{{ socialMedia.twitterLink }}" target="_blank">Twitter</a></li>
+    </ul>
+    <div class="footer__copyright">
+        &copy; Isabelle Fox 2018
+        
+    </div>
+</footer>
+
+
+
+<footer class="footer footer--mobile fade-in">
+    <div class="footer__newsletter">
+        {% include 'partials/newsletter' %}
+    </div>
+    <div class="footer__links">
+        <ul class="footer__linklist">
+            <li><a href="/deliveries-and-returns">Delivery & Returns</a></li>
+            <li><a href="/terms-and-conditions">Terms & Conditions</a></li>
+            <li><a href="/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/page/faq">FAQ</a></li>
+            <li><a href="/page/careers">Careers</a></li>
+        </ul>
+        <ul class="footer__linklist">
+            <li><a href="/page/contact">Contact</a></li>
+            <li>&nbsp;</li>
+            <li><a href="{{ socialMedia.instagramLink }}" target="_blank">Instagram</a></li>
+            <li><a href="{{ socialMedia.facebookLink }}" target="_blank">Facebook</a></li>
+            <li><a href="{{ socialMedia.twitterLink }}" target="_blank">Twitter</a></li>
+        </ul>
+    </div>
+
+    <div class="footer__copyright">
+        &copy; Isabelle Fox 2018
+        
+    </div>
+</footer>

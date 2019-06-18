@@ -1,0 +1,23 @@
+{% include 'partials/newsletter' %}
+<textarea id="output"></textarea>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=fetch"></script>
+<script>
+    document.querySelectorAll('.newsletter').forEach(function (form) {
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            fetch(form.getAttribute('action'), {
+                method: form.getAttribute('method'),
+                body: new FormData(form),
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            }).then(function (r) {
+                return r.text();
+            }).then(function (r) {
+                document.getElementById('output').value = r;
+            });
+        });
+    });
+</script>
+

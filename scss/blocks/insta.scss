@@ -1,0 +1,86 @@
+.insta {
+    margin-bottom: 70px;
+    text-align: center;
+    @extend .text-small;
+    display: block;
+    background-size: cover;
+    float: left;
+    
+    &--nolink {
+        pointer-events: none;
+    }
+    
+    &--small {
+        width: 50%;
+        height: 16.665vw;
+        
+        @include small {
+            height: 50vw;
+        }
+        .insta__text {
+            top: 0;
+            transform: none;
+        }
+    }
+    
+    &--sizer,
+    &--regular {
+        width: 50vw;
+        height: 50vw;
+        @include medium {
+            width: 25%;
+            height: 25vw;
+        }
+    }
+    
+    &--large {
+        width: 100vw;
+        height: 100vw;
+        @include medium {
+            width: 50%;
+            height: 50vw;
+        }
+    }
+    
+    &__overlay {
+        text-align: center;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: $warm-grey;
+        opacity: 0;
+        transition: opacity .3s;
+        
+        &--centered {
+            .insta__text {
+                position: absolute;
+                top: 50%;
+                width: 100%;
+                transform: translateY(-50% );
+            }    
+        }
+        
+        .no-touch &:hover {
+            opacity: 1;
+        }
+    }
+    
+    &__text {
+        
+        padding: $block-padding-small 1rem $block-padding-small 1rem;
+        @include medium {
+            padding: $block-padding-medium 1rem $block-padding-medium 1rem;
+        }
+    }
+    
+    &__shop {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        letter-spacing: .5px;
+        padding: $block-padding-small 1rem $block-padding-small 1rem;
+        @include medium {
+            padding: $block-padding-medium 1rem $block-padding-medium 1rem;
+        }
+    }
+}

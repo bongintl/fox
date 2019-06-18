@@ -1,0 +1,17 @@
+.campaign-item {
+    width: 50%;
+    background: coral;
+    
+    @include medium {
+        height: viewport-height-medium();
+        padding-bottom: 0;
+    }
+    &__image {
+        width: 100%;
+        height: viewport-height-small( .5 );
+        background-size: cover;
+        @include medium {
+            height: 100%;
+        }
+    }
+}

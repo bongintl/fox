@@ -1,0 +1,13 @@
+<div class="product-category {{ color ? 'product-category--' ~ color }} s-col-6 m-col-6 l-col-6 s-h-portrait m-h-portrait l-h-portrait fade-in" id="{{ collection.handle }}">
+    <h1 class="product-category__title">{{ collection.title | italicise_lowercase | raw }}</h1>
+    {% if collection.image is defined and not null %}
+        <div
+            class="product-category__image"
+            style="background-image: url({{ collection.image.src }})"
+        ></div>
+    {% endif %}
+    <p class="product-category__index">{{ collection.body_html | striptags }}</h6>
+</div>
+{% for product in craft.shopify.getProductsInCollection( collection ) %}
+    {% include 'partials/product-thumbnail' with { product: product, image: product.image.src, collection: collection.id } %}
+{% endfor %}

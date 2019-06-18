@@ -1,0 +1,46 @@
+.logo {
+    $path-length-1: 75;
+    $path-length-2: 206;
+    $duration: 2s;
+    height: 100%;
+    width: auto;
+    @keyframes logo-draw-path-1 {
+        0% {
+            stroke-dasharray: 0 1000;
+            stroke-dashoffset: $path-length-1 / -2;
+        }
+        50% {
+            stroke-dasharray: $path-length-1 1000;
+            stroke-dashoffset: 0;
+        }
+    }
+    @keyframes logo-draw-path-2 {
+        0% {
+            stroke-dasharray: 0 1000;
+            stroke-dashoffset: $path-length-2 / -2;
+        }
+        50% {
+            stroke-dasharray: $path-length-2 1000;
+            stroke-dashoffset: 0;
+        }
+    }
+    @keyframes logo-fade-out {
+        50% { opacity: 1 }
+        100% { opacity: 0 }
+    }
+    .logo__path--1 {
+        animation: logo-draw-path-1 $duration ease-out 1;
+    }
+    .logo__path--2 {
+        animation: logo-draw-path-2 $duration ease-out 1;
+    }
+    &--animating {
+        animation: logo-fade-out $duration infinite;
+        .logo__path--1 {
+            animation: logo-draw-path-1 $duration ease-out infinite;
+        }
+        .logo__path--2 {
+            animation: logo-draw-path-2 $duration ease-out infinite;
+        }
+    }
+}

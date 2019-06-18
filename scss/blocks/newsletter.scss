@@ -1,0 +1,58 @@
+.newsletter {
+    display: flex;
+    &--message {
+        pointer-events: none;
+    }
+    &__email,
+    &__submit{
+        display: block;
+        width: auto;
+        background: none;
+        font: inherit;
+        color: inherit;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 1px solid black;
+        padding-bottom: .5em;
+        border-radius: 0;
+        transition: opacity .25s;
+        .newsletter--message & {
+            opacity: 0;
+        }
+        .newsletter--warm-grey & {
+            border-bottom: 1px solid $warm-grey;
+        }
+    }
+    &__email {
+        flex-grow: 1;
+        &::placeholder {
+            color: inherit;
+            
+        }
+    }
+    &__submit {
+        display: block;
+        background: none;
+        font: inherit;
+        color: inherit;
+    }
+    &__message {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: inherit;
+        pointer-events: none;
+        transition: opacity .25s;
+        opacity: 0;
+        border-bottom: 1px solid black;
+        .newsletter--message & {
+            opacity: 1;
+        }
+        .newsletter--warm-grey & {
+            border-bottom: 1px solid $warm-grey;
+        }
+    }
+}

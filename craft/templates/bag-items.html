@@ -1,0 +1,5 @@
+{% spaceless %}
+    {% header 'Content-type:application/json' %}
+    {% header "Access-Control-Allow-Origin: #{ siteUrl }" %}
+    {{ craft.shopify.getBagItems( craft.request.getSegment( 2 ) ) | json_encode | raw }}
+{% endspaceless %}

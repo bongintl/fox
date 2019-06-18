@@ -1,0 +1,37 @@
+.dropdown {
+    a.dropdown__title {
+        &--active {
+            border-bottom-color: black;
+        }
+    }
+    &--open {
+        a.dropdown__title {
+            border-bottom-color: black;
+        }
+    }
+    &__items {
+        opacity: 0;
+        transition: opacity .25s;
+        padding-bottom: 2em;
+        position: absolute;
+        top: 100%;
+        display: flex;
+        flex-direction: column;
+        .dropdown--right & {
+            right: 1rem;
+        }
+    }
+    &:hover {
+        .dropdown__items {
+            opacity: 1;
+        }
+    }
+    // &__item {
+    //     white-space: nowrap;
+    //     a {
+    //         // position: absolute;
+    //         // top: 0;
+    //         // left: 0;
+    //     }
+    // }
+}

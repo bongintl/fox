@@ -1,0 +1,13 @@
+{% extends '_layout' %}
+{% block content %}
+    <div class="press">
+        <div class="press__list">
+            {% for item in entry.press if item.pdf | length and item.image | length %}
+                <a class="press__item" href="{{ item.pdf.first().url }}" target="_blank" data-thumbnail="{{ item.image.first().url }}">
+                    <h1>{{ item.publication }}</h1>
+                </a>
+            {% endfor %}
+        </div>
+        <img class="press__thumbnail">
+    </div>
+{% endblock %}

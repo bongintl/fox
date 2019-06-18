@@ -1,0 +1,34 @@
+{% set image = row.illustration.first() %}
+
+<div class="row row--margin principle fade-in">
+
+    {% if row.arrangement == 'textRight' %}
+    
+        <div class="s-col-12 m-col-12 l-col-6 principle__image" style="background-image: url('{{ image.url }}')"></div>
+    
+        <div class="s-col-12 m-col-10 m-off-1 l-col-6">
+            <div class="principle__text">
+                <h1 class="principle__heading">{{ row.heading | italicise_lowercase | raw }}</h1>
+                {{ img( image, [ 1 ], { class: 'principle__image principle__image--mobile' } ) }}
+                <!--<div class="principle__image principle__image--mobile" style="background-image: url('{{ image.url }}')"></div>-->
+                {{ row.copy }}
+            </div>
+        </div>
+        
+        
+    {% else %}
+  
+        <div class="s-col-12 m-col-10 m-off-1 l-col-6">
+            <div class="principle__text">
+                <h1 class="principle__heading">{{ row.heading | italicise_lowercase | raw }}</h1>
+                <!--<div class="principle__image principle__image--mobile" style="background-image: url('{{ image.url }}')"></div>-->
+                {{ img( image, [ 1 ], { class: 'principle__image principle__image--mobile' } ) }}
+                {{ row.copy }}
+            </div>
+        </div>
+        
+        <div class="s-col-12 m-col-12 l-col-6 principle__image" style="background-image: url('{{ image.url }}')"></div>     
+        
+    {% endif %}
+
+</div>

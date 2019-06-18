@@ -1,0 +1,5 @@
+{% for block in blocks %}
+
+    {% include ['partials/delivery-blocks/' ~ block.type, '/partials/blocks/missing' ] %}
+
+{% endfor %}

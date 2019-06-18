@@ -1,0 +1,119 @@
+.footer {
+    overflow: auto;
+    font-size: 13px;
+    margin: 90px 30px 2rem 30px;
+    line-height: 1.75;
+    display: none;
+    
+    @include medium {
+        display: block;
+        font-size: $text-xsmall;
+        margin: 40px;
+    }
+    
+    @include large {
+        font-size: $text-xsmall;
+        margin: 2rem 50px;
+    }
+
+    &--mobile {
+        display: block;
+
+        @include medium {
+            display: none;
+        }
+        
+        .footer__links {
+            padding-top: 1.5em;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .footer__linklist {
+            margin: 0;
+        }
+        
+        .footer__copyright {
+            margin-top: 2em;
+        }
+    }
+    
+    &__newsletter,
+    &__linklist,
+    &__copyright {
+        float: left;
+    }
+    
+    &__newsletter {
+        margin-bottom: 1rem;
+        @include medium {
+            width: 100%;    
+            margin-bottom: 2rem;
+            
+            form {
+                width: calc( 50% - 20px );
+                
+                @include large {
+                    width: 80%;
+                }
+            }
+        }
+        @include large {
+            width: 25%;
+            padding-right: 2%;
+        }
+    }
+    
+    &__newsletter,
+    &__copyright {
+        @include small {
+            width: 100%;  
+        }
+    }
+    
+    &__linklist {
+        margin-left: 2%;
+        
+        @include medium {
+            width: 26.6%;
+            margin-left: 0;
+        }
+        
+        @include large {
+            width: 10%;
+        }
+
+        
+        &:first-of-type {
+            @include medium {
+                width: 26.6%;
+            }
+            
+            @include large {
+                width: 13%;    
+            }
+        }
+        
+        a:hover {
+            border-bottom: 1px solid black;
+        }
+    }
+    
+    &__copyright {
+        text-align: left;
+        float: left;
+        width: 100%;
+        
+        @include medium {
+            text-align: right;
+            width: 20%;    
+            float: right;
+        }
+        
+        @include large {
+            width: 15%;
+        }
+    }
+    
+}

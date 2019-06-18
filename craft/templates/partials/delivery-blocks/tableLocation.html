@@ -1,0 +1,60 @@
+{% if entry.deliveryTable | length %}
+
+    <div class="list__content">
+
+        <div class="table">    
+    
+            {% for block in entry.deliveryTable %}
+                
+                {% if block.type != 'details' %}
+                    
+                    {% if not loop.first %}
+                    </div><!--TABLE ROW CLOSE-->
+                    {% endif %}
+                    <div class="table__row"> <!--TABLE ROW OPEN-->
+                            
+                        <div class="table__left">
+                            {{ block.countryName }}
+                        </div>
+                        
+                {% else %}
+                
+                        <div class="table__right"> 
+                           
+                            {% for row in block.copy %}
+                                
+                                
+                                <div class="table__details
+                                {% if loop.first%} table__details--first{% endif %}
+                                {% if loop.last%} table__details--last{% endif %}
+                                ">
+                                    <div class="table__type">
+                                        {{ row.col1 }}
+                                        {% if row.col2 %}
+                                            <br>({{ row.col2 }})
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <div class="table__time">
+                                        {{ row.col3 }}
+                                    </div>
+                                    
+                                </div>
+                                
+                                
+                            {% endfor %}
+                            
+                        </div> 
+                        
+                        {% if loop.last %}
+                        </div>
+                        {% endif %}
+                {% endif %}
+            {% endfor %}
+            
+            
+        </div>
+    
+    </div>
+
+{% endif %}

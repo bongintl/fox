@@ -1,0 +1,55 @@
+.newsletter-block {
+    background: $green;
+    color: $warm-grey;
+    
+    @include large {
+        min-height: 44.444vw;
+    }
+    
+    &__title {
+        padding: $block-padding-small;
+        
+        @include small {
+            position: static;
+            transform: none;
+            font-size: 27px;
+            padding-left: 50px;
+            padding-right: 50px;
+        }
+        
+        @include medium {
+            padding: 40px;
+            font-size: 45px;
+            line-height: 1.1;
+        }
+        
+        @include large {
+            padding-left: 100px;
+            padding-right: 100px;
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            text-align: center;
+            transform: translateY( -50% );
+            font-size: 45px;
+        }
+    }
+    &__form {
+        position: absolute;
+        width: 80%;
+        bottom: 0;
+        left: 50%;
+        transform: translateX( -50% );
+        padding: $block-padding-small;
+        font-size: $text-xsmall;
+        max-width: 25em;
+        @include medium {
+            padding: 40px;
+            font-size: $text-small;
+            width: 100%;
+        }
+        @include large {
+            padding: $block-padding-medium;
+        }
+    }
+}

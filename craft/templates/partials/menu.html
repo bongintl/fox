@@ -1,0 +1,51 @@
+<div class="sidebar sidebar--left">
+    <div class="menu">
+        <div class="sidebar__close" data-close-left-sidebar><img src="/close.svg" alt=""></div>
+        <div class="menu__header">
+            <div class="menu__currency currency-select">
+                <a class="currency-select__title" data-display-currency-code></a>
+                <div class="currency-select__items">
+                	{% for row in globals.currencies %}
+                		<div class="currency-select__item">
+        					<a data-set-currency="{{ row.currency }}">{{ row.currency }}</a>
+        				</div>
+                	{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="menu__items">
+            <div class="menu__item menu-accordion">
+                <div class="menu-accordion__title">Shop</div>
+                <div class="menu-accordion__items">
+                    {% for collectionID in shopCollectionIDs if collectionID in shopCollections | keys %}
+                        {% set collection = shopCollections[ collectionID ] %}
+    					<a href="/shop#{{ collection.handle }}" class="menu-accordion__item">
+    					    {{ collection.title | capitalize }}
+                        </a>
+    				{% endfor %}
+    				{% if craft.entries.section('sales').first().sales | length %}
+    				    <a class="menu-accordion__item" href="/sale">Sale</a>
+    				{% endif %}
+    				<a class="menu-accordion__item" href="/page/appointments">Appointments</a>
+                </div>
+            </div>
+            <div class="menu__item menu-accordion">
+                <div class="menu-accordion__title">Campaigns</div>
+                <div class="menu-accordion__items">
+                    {% for campaign in campaigns %}
+    					<a href="{{ campaign.url }}" class="menu-accordion__item">
+    					    {{ campaign.title }}
+                        </a>
+    				{% endfor %}
+                </div>
+            </div>
+            <a href="/journal/1" class="menu__item">Journal</a>
+            <a href="/page/about" class="menu__item">About</a>
+            <a href="/press" class="menu__item">Press</a>
+            <a href="/insta-shop/1" class="menu__item">Insta Shop</a>
+        </div>
+        <div class="menu__footer">
+            {% include 'partials/newsletter' with { placeholder: 'Newsletter sign up' } %}
+        </div>
+    </div>
+</div>

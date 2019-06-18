@@ -1,0 +1,33 @@
+{% extends '_layout' %}
+{% block content %}
+    {% set perPage = 32 %}
+	{% set page = craft.request.getSegment( 2 ) - 1 %}
+	{% set count = craft.entries.section('instaShop').count() %}
+	{% set offset = perPage * page %}
+	{% if offset > count %}{% exit 404 %}{% endif %}
+	{% set next = offset + perPage < count ? page + 1 : null %}
+    <div class="row masonry pagination">
+        {% set entries = craft.entries({
+            section: 'instaShop',
+            limit: perPage,
+            offset: offset,
+            with: [ 'image' ]
+        }) %}
+        {% set products = craft.shopify.getProducts({
+            ids: entries | filter_by('product') | pluck('product') | join(',')
+        }) | index_by('id') %}
+        {% for entry in entries %}
+            {% set img = entry.image[ 0 ] ?? null %}
+            {% set product = products[ entry.product ] ?? null %}
+            {% set sizes = {
+                regular: [ 6, 3, 3, 3 ],
+                large: [ 12, 6, 6, 6 ]
+            }[ entry.size.value ] %}
+            {% include "/partials/insta" with { product: product, img: img, sizes: sizes, class: 'centered' } %}
+        {% endfor %}
+        <div class="masonry__sizer s-col-6 m-col-3 l-col-3"></div>
+        {% if next != null %}
+			<a class="pagination__more ajax fade-in" href="/insta-shop/{{ next + 1 }}">More posts</a>
+		{% endif %}
+    </div>
+{% endblock %}

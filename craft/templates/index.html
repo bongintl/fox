@@ -1,0 +1,98 @@
+{% extends "_layout" %}
+{% block content %}
+    {% set instaEntries = craft.entries({ section: 'instaShop', limit: 8, with: ['image'] }) %}
+    {% set products = craft.shopify.getProducts({
+        ids: [ entry.featuredProduct1, entry.featuredProduct2 ] | merge( instaEntries | filter_by('product') | pluck('product') ) | join(',')
+    }) | index_by('id') %}
+    
+    {% set desktopHero %}
+        {% set assets = [] %}
+        {% for block in entry.desktopHero if block.image | length > 0 %}
+            {% set assets = assets | merge([{
+                image: block.image.first,
+                href: block.heroLink ?: null
+            }]) %}
+        {% endfor %}
+        {% include "partials/sticky-header" with {
+            title: entry.heading,
+            assets: assets
+        } %}
+    {% endset %}
+    
+    {% if entry.mobileHeroImage | length %}
+        <div class="l-hide">
+            {% include "partials/sticky-header" with {
+                title: entry.heading,
+                assets: [{
+                    image: entry.mobileHeroImage.first,
+                    href: entry.mobileHeroLink ?: null
+                }]
+            } %}
+        </div>
+        <div class="s-hide l-show">
+            {{ desktopHero }}
+        </div>
+    {% else %}
+        {{ desktopHero }}
+    {% endif %}
+    
+    <div class="row">
+        {% include 'partials/product-thumbnail' with { product: products[ entry.featuredProduct1 ], sizes: [ 6, 6, 4, 4 ] } %}
+        {% include 'partials/product-thumbnail' with { product: products[ entry.featuredProduct2 ], sizes: [ 6, 6, 4, 4 ] } %}
+        <div class="s-col-12 m-col-12 tl-col-4 l-col-4 s-h-square m-h-landscape tl-h-portrait l-h-limit l-h-portrait newsletter-block fade-in">
+            <h4 class="newsletter-block__title">{{ entry.newsletterCta | italicise_lowercase | replace('\n', '<br>' ) | raw }}</h4>
+            <div class="newsletter-block__form">
+                {% include 'partials/newsletter' with { color: 'warm-grey' } %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% for entry in craft.entries.section('journal').limit( 2 ) %}
+            {% include 'partials/journal' with { entry: entry, intro: entry.shortIntro, orientation: 'landscape', class: 'home' } %}
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="s-col-12 m-col-12 tl-col-6 l-col-6 s-h-square m-h-landscape l-h-landscape testimonials fade-in">
+            <div class="testimonials__top">What Others Say</div>
+            <div class="testimonials__slider">
+                {% for testimonial in entry.testimonials %}
+                    <div class="testimonials__slide s-col-12 m-col-12 l-col-6 s-h-square m-h-landscape l-h-landscape">
+                        <blockquote class="testimonials__quote">"{{ testimonial.quote }}"</blockquote>
+                        <div class="testimonials__attribution">{{ testimonial.attribution }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <a href="/page/appointments" class="s-col-12 m-col-12 tl-col-6 l-col-6 s-h-square m-h-landscape l-h-landscape appointments fade-in">
+            <div class="appointments__top">Appointments</div>
+            <h4 class="appointments__title">{{ entry.appointmentsCta | italicise_lowercase | replace('\n', '<br>' ) | raw }}</h4>
+            <div class="appointments__bottom">
+                <span>{{ entry.appointmentsCopy }}</span>
+            </div>
+        </a>
+    </div>
+    <div class="row instashop">
+        <div class="s-col-12 m-col-12 tl-col-4 l-col-4 s-h-square m-h-square tl-h-square l-h-square row fade-in">
+            {% for entry in instaEntries | slice( 0, 4 ) %}
+                {% include "/partials/insta" with {
+                    product: products[ entry.product ] ?? null,
+                    img: entry.image | length ? entry.image[ 0 ] : null,
+                    sizes: [ 6, 6, 2, 2 ]
+                } %}
+            {% endfor %}
+        </div>
+        <a href="/insta-shop" class="s-col-12 m-col-12 tl-col-4 l-col-4 tl-h-square l-h-square instalink fade-in">
+            <h4 class="instalink__title">{{ entry.instaShopCta | italicise_lowercase | replace('\n', '<br>' ) | raw }}</h4>
+            <div class="instalink__bottom">SEE MORE</div>
+        </a>
+        <div class="s-col-12 m-col-12 tl-col-4 l-col-4 s-h-square m-h-square tl-h-square l-h-square row fade-in">
+            {% for entry in instaEntries | slice( 4 ) %}
+                {% include "/partials/insta" with {
+                    product: products[ entry.product ] ?? null,
+                    img: entry.image | length ? entry.image[ 0 ] : null,
+                    sizes: [ 6, 6, 2, 2 ]
+                } %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

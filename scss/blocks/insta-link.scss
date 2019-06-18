@@ -1,0 +1,32 @@
+.instalink {
+    text-align: center;
+    background-color: $off-white;
+    &__title {
+        width: 100%;
+        top: 50%;
+        padding: 60px $block-padding-small 30px $block-padding-small;
+        font-size: 27px;
+        @include medium {
+            font-size: 45px;
+            padding: 80px $block-padding-medium 40px $block-padding-medium;
+            line-height: 1.1;
+        }
+        @include tablet-landscape {
+            top: 50%;
+            transform: translateY(-50%);
+            padding: $block-padding-medium;
+        }
+    }
+    &__bottom {
+        position: absolute;
+        width: 100%;
+        padding: 1rem 1rem $block-padding-medium 1rem;
+        bottom: 0;
+        @extend .text-small;
+        display: none;
+        letter-spacing: 0.5px;
+        @include tablet-landscape {
+            display: block;
+        }
+    }
+}

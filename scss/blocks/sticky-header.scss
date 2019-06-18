@@ -1,0 +1,59 @@
+.stickyheader {
+    &--margin {
+        margin-bottom: 6em;
+        @include small {
+            margin-bottom: 3em;
+        }
+    }
+    &__images {
+        background: $off-white;
+    }
+    &__image {
+        height: auto;
+        display: block;
+        &--left {
+            width: 50%;
+        }
+        &--right {
+            display: block;
+            position: absolute;
+            top: 10%;
+            left: 60%;
+            width: 30%;
+            height: 80%;
+            img, video {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+    &__title {
+        height: 20%;
+        z-index: 10;
+        padding-bottom: 1em;
+        margin-bottom: -.5em;
+        margin-left: auto;
+        margin-right: auto;
+        pointer-events: none;
+        width: 80%;
+        @include small {
+            font-size: 33px;
+        }
+        @include medium {
+            line-height: 1.1;
+            // width: 70%;
+        }
+        
+        @include sticky {
+            // width: 50%;
+            top: calc( #{ $nav-height-small } + 1em );
+            @include medium {
+                top: calc( #{ $nav-height-medium } + 1em );
+            }
+            @include large {
+                top: calc( #{ $nav-height-large } + 1em );
+            }
+        }
+    }
+}

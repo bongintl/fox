@@ -1,0 +1,24 @@
+{% set image = image | default( product.image is defined ? product.image.src : null ) %}
+{% set sizes = sizes | default( [ 6, 6, 6 ] ) %}
+{% set widthClasses = sizes | length == 4
+    ? "s-col-#{ sizes[ 0 ] } m-col-#{ sizes[ 1 ] } tl-col-#{ sizes[ 2 ] } l-col-#{ sizes[ 3 ] }"
+    : "s-col-#{ sizes[ 0 ] } m-col-#{ sizes[ 1 ] } l-col-#{ sizes[ 2 ] }"
+%}
+{% set url = "/product/" ~ product.id %}
+{% if collection is defined and collection is not null %}
+    {% set url = url ~ '?collection=' ~ collection %}
+{% endif %}
+<div class="fade-in {{ widthClasses }}">
+    {% set class = "#{ widthClasses } s-h-portrait m-h-portrait tl-h-portrait l-h-portrait" %}
+    {% if image %}
+        <a href="{{ url }}">
+            {{ img( image, [ sizes[ 0 ] / 12, sizes[ 1 ] / 12, sizes[ 2 ] / 12 ], { class: class } ) }}
+        </a>
+    {% endif %}
+    {% include 'partials/product-label' with {
+        product: product,
+        image: image,
+        collection: collection | default( null )
+    } only %}
+</div>
+

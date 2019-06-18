@@ -1,0 +1,67 @@
+{#
+ # Layout template
+ # ---------------
+ #
+ # This template defines your site’s global layout. It can be
+ # “extended” by other templates to fill in the gaps.
+ #
+ # See Twig’s Template Inheritance documentation for more details:
+ # http://twig.sensiolabs.org/doc/templates.html#template-inheritance
+ #}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+	<meta charset="utf-8" />
+	<title>{% if title is defined %}{{ title }} - {% endif %}{{ siteName }}</title>
+	<link rel="home" href="{{ siteUrl }}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/style.css?1">
+	<base href="{{ siteUrl }}">
+	
+	{#
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="{{ siteName }}" />
+	<meta property="og:url" content="{{ craft.request.getUrl() }}" />
+	<meta property="og:description" content="{{ seo.seoDescription }}" />
+	{% if seo.seoImage | length %}<meta property="og:image" content="{{ seo.seoImage.first.url }}" />{% endif %}
+	
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="{{ siteName }}">
+	<meta name="twitter:url" content="{{ craft.request.getUrl() }}">
+	<meta name="twitter:description" content="{{ seo.seoDescription }}">
+	{% if seo.seoImage | length %}<meta name="twitter:image" content="{{ seo.seoImage.first.url }}">{% endif %}
+	
+    {% if globals.favicon | length %}
+    	<link rel="icon" href="{{ globals.favicon.first.getUrl({ width: 16, height: 16 }) }}" sizes="16x16">
+    	<link rel="icon" href="{{ globals.favicon.first.getUrl({ width: 32, height: 32 }) }}" sizes="32x32">
+    {% endif %}
+    #}
+</head>
+
+<body>
+	{% set showPreloader = craft.request.firstSegment == '' and craft.request.urlReferrer == '' %}
+	{% if showPreloader %}
+		{% include 'partials/preloader' %}
+	{% endif %}
+	{% set shopCollectionIDs =
+		craft.entries({ section: 'shop', with: [ 'shop' ] }).first().shop
+		| filter_by('type', 'collection' )
+		| filter_by( 'collection' )
+		| pluck( 'collection' )
+	%}
+	{% set shopCollections = craft.shopify.getCollections({ ids: shopCollectionIDs | join(',') }) | index_by('id') %}
+	{% set campaigns = craft.entries.section( "campaigns" ).order( 'lft' ) %}
+	<div class="blur"></div>
+	{% include 'partials/menu' %}
+	{% include 'partials/bag' %}
+	{% include 'partials/nav' %} 
+	<main class="main">
+		{% block content %}{% endblock %}
+		{% include 'partials/footer' %}
+	</main>
+	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=fetch"></script>
+	<script src="https://cdn.shopify.com/s/javascripts/currencies.js"></script>
+	<script type="text/javascript" src="/bundle.js?2"></script>
+</body>
+</html>

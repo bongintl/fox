@@ -1,0 +1,70 @@
+.testimonials {
+    text-align: center;
+    background: $warm-grey;
+    &__top,
+    &__attribution {
+        @extend .text-small;
+        padding: $block-padding-small;
+        @include medium {
+            padding: 40px;
+            font-size: 13px;
+        }
+        @include large {
+            padding: $block-padding-medium;
+            font-size: 15px;
+        }
+    }
+    &__top {
+        position: absolute;
+        width: 100%;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+    }
+    // .slick-list, .slick-track, .slick-slide {
+    //     height: 100%;
+    // }
+    .slick-dots {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
+    &__slider, &__slide {
+        width: 100%;
+        height: 100%;
+        // @include medium {
+        //     width: 50vw;
+        //     height: 33.333vw;
+        // }
+        @include small {
+            font-size: 24px;
+        }
+    }
+    &__quote {
+        width: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: $block-padding-small;
+        font-size: 21px;
+        @include medium {
+            padding: 0;
+            font-size: 30px;
+            line-height: 1.25;
+            width: calc(100% - 256px);
+            margin-left: 128px;
+        }
+        @include large {
+            font-size: 30px;
+            padding: $block-padding-medium 100px;
+            width: 100%;
+            margin-left: 0;
+        }
+    }
+    &__attribution {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+}

@@ -1,0 +1,6 @@
+{% if product is defined and product is not null %}
+    {% include 'partials/product-thumbnail' with { product: product, image: image } %}
+{% else %}
+    {% set class = "s-col-6 m-col-6 l-col-6 s-h-portrait m-h-portrait l-h-portrait" %}
+    {{ img( image, [ 6, 6, 6 ], { class: class } ) }}
+{% endif %}

@@ -1,0 +1,46 @@
+.product-images {
+    @include medium {
+        // margin-top: 60px;
+    }
+    @include large {
+        margin-top: 110px;
+    }
+    &__count {
+        position: absolute;
+        text-align: right;
+        padding: 1.5rem;
+        bottom: 0;
+        width: 100%;
+        pointer-events: none;
+        @include medium {
+            text-align: left;
+            top: 0;
+            bottom: auto;
+        }
+        @include large {
+            display: none;
+        }
+    }
+    &__slide {
+        height: 150vw;
+        img {
+            height: 100%;
+        }
+        @include large {
+            height: 75vw;
+        }
+    }
+    // &__nav {
+    //     position: absolute;
+    //     width: 50%;
+    //     height: 100%;
+    //     top: 0;
+    //     z-index: 50;
+    //     &--prev {
+    //         left: 0;
+    //     }
+    //     &--next {
+    //         right: 0;
+    //     }
+    // }
+}

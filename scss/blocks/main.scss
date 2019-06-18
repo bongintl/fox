@@ -1,0 +1,33 @@
+.main {
+    padding-top: $nav-height-small;
+    @include medium {
+        padding-top: $nav-height-medium;
+    }
+    @include large {
+        padding-top: $nav-height-large;
+    }
+    transition: filter .3s;
+    &--blurry {
+        // filter: blur( 5px );
+        cursor: pointer;
+        & > * {
+            pointer-events: none;
+        }
+    }
+    &:before,
+    &:after {
+        content: '';
+        position: fixed;
+        display: block;
+        height: 100%;
+        width: 1rem;
+        top: 0;
+        background: #F6F3F1;
+    }
+    &:before {
+        right: 100%;
+    }
+    &:after {
+        left: 100%;
+    }
+}

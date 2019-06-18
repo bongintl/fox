@@ -1,0 +1,41 @@
+{% extends "_layout" %}
+
+{% block content %}
+    {% set productIDs = entry.firstProduct ? [ entry.firstProduct ] : [] %}
+    {% for block in entry.blocks %}
+        {% switch block.type %}
+            {% case 'image' %}
+                {% if block.product %}
+                    {% set productIDs = productIDs | merge([ block.product ]) %}
+                {% endif %}
+            {% case 'twoImages' %}
+                {% if block.productLeft %}
+                    {% set productIDs = productIDs | merge([ block.productLeft ]) %}
+                {% endif %}
+                {% if block.productRight %}
+                    {% set productIDs = productIDs | merge([ block.productRight ]) %}
+                {% endif %}
+        {% endswitch %}
+    {% endfor %}
+    
+    {% set products =
+        productIDs | length > 0
+            ? craft.shopify.getProducts({ ids: productIDs | join(',') }) | index_by('id')
+            : {}
+    %}
+
+    <div class="row">
+        <div class="product-category product-category--warm-grey fade-in s-col-6 m-col-6 l-col-6 s-h-portrait m-h-portrait l-h-portrait">
+            <h1 class="product-category__title">{{ entry.season | upper }} <em>{{ entry.year }}</em></h1>
+            <p class="product-category__index">{% if entry.description != '' %}{{ entry.description }}{% endif %}</h6>
+        </div>
+        {% if entry.firstImage | length %}
+            {% set firstProduct = entry.firstProduct ? products[ entry.firstProduct ] : null %}
+            {% include 'partials/campaigns/small-image' with { product: firstProduct, image: entry.firstImage.first() } %}
+        {% endif %}
+        {% for block in entry.blocks %}
+            {% include "partials/campaigns/#{ block.type }" %}
+        {% endfor %}
+    </div>
+    
+{% endblock %}

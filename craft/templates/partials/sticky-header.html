@@ -1,0 +1,28 @@
+<div class="stickyheader{% if margin is defined %} stickyheader--margin{% endif %} fade-in">
+    <h1 class="stickyheader__title">{{ title | italicise_lowercase | replace( '\n', '<br>' ) | raw }}</h1>
+    <div class="stickyheader__images">
+        {% for asset in assets %}
+        
+            {% set image %}
+                {% switch asset.image.kind %}
+                    {% case 'image' %}
+                        {{ img( asset.image, [ 1 / assets | length ] ) }}
+                    {% case 'video' %}
+                        <video src="{{ asset.image.url }}" autoplay loop muted playsinline></video>
+                {% endswitch %}
+            {% endset %}
+            
+            {% set class = bem('stickyheader__image', {
+                left: assets | length == 2 and loop.index == 1,
+                right: assets | length == 2 and loop.index == 2
+            }) %}
+            
+            {% if asset.href %}
+                <a href="{{ asset.href }}" class="{{ class }}">{{ image }}</a>
+            {% else %}
+                <div class="{{ class }}">{{ image }}</div>
+            {% endif %}
+            
+        {% endfor %}
+    </div>
+</div>

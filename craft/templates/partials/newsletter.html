@@ -1,0 +1,7 @@
+<form class="newsletter newsletter--{{ color | default('black') }}" action="/" method="POST">
+    <input class="newsletter__email" type="email" name="email" placeholder="{{ placeholder | default( 'Sign up for our newsletter' ) }}"/>
+    {{ getCsrfInput() }}
+    <input type="hidden" name="action" value="mailchimpSubscribe/list/subscribe">
+    <input class="newsletter__submit" type="submit" value="Send"/>
+    <p class="newsletter__message"></p>
+</form>

@@ -1,0 +1,28 @@
+{% extends "_layout" %}
+
+{% block content %}
+
+
+<div class="docs">
+    
+    <div class="row">
+        <div class="s-col-12 m-col-6 m-off-3">
+            <h1 class="docs__heading">{{ entry.title | italicise_lowercase | replace( '\n', '<br>' ) | raw }}</h1>
+        </div>
+    </div>
+    
+    
+    <div class="row row--margin ">
+        <div class="s-col-12 m-col-10 m-off-1 l-col-6 l-off-3">
+
+            
+           {{ entry.copy }}
+            
+            
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock %}

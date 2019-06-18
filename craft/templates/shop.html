@@ -1,0 +1,32 @@
+{% extends '_layout' %}
+{% block content %}
+    <div class="row">
+        {% set collections = shopCollections | index_by('id') %}
+        {% set collectionIndex = 0 %}
+        {% for block in entry.shop %}
+            {% switch block.type %}
+                {% case 'collection' %}
+                    {% if collections[ block.collection ] is defined %}
+                        {% set collection = collections[ block.collection ] %}
+                        {% set color = collectionIndex % 2 == 0 ? 'green-warm-grey' : 'warm-grey-green' %}
+                        {% include 'partials/collection' with { collection: collection, color: color } %}
+                        {% set collectionIndex = collectionIndex + 1 %}
+                    {% elseif currentUser %}
+                        <div class="s-col-12">
+                            <h2>Bad collection in Shop</h2>
+                        </div>
+                    {% endif %}
+                {% case 'image' %}
+                    {% set class = "fade-in #{ block.width == 'half' ? 's-col-6' : '' }" %}
+                    {% for asset in block.image %}
+                        {% switch asset.kind %}
+                            {% case 'image' %}
+                                {{ img( asset, [ block.width == 'half' ? 0.5 : 1 ], { class: class } ) }}
+                            {% case 'video' %}
+                                <video class="{{ class }}" src="{{ asset.url }}" autoplay loop muted playsinline></video>
+                        {% endswitch %}
+                    {% endfor %}
+            {% endswitch %}
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+.instashop {
+    display: flex;
+    flex-direction: column-reverse;
+    @include tablet-landscape {
+        flex-direction: row;
+    }
+    & > div:last-of-type  {
+        display: none;
+        @include tablet-landscape {
+            display: flex;
+        }
+    }
+    // @include small {
+    //     flex-direction: column-reverse;
+    //     div:last-of-type  {
+    //         display: none;
+    //     }
+    // }
+}

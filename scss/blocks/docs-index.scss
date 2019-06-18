@@ -1,0 +1,35 @@
+.docs-index {
+    position: fixed;
+    bottom: 0;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 3rem;
+    height: 11rem;
+    width: 100%;
+    overflow-x: scroll;
+    background: $off-white;
+    border-top: 1px solid #AFAFAF;
+    transition: transform .5s;
+    transform: translateY( 100% );
+    display: none;
+    @include tablet-landscape {
+        display: flex;
+    }
+    &--visible {
+        transform: none;
+    }
+    &__item {
+        width: 16em;
+        color: #AFAFAF;
+        transition: color .25s;
+        text-transform: capitalize;
+        font-size: $text-small;
+        line-height: 1.75;
+        &:hover {
+            color: black;
+        }
+        &--active {
+            color: $green;
+        }
+    }
+}

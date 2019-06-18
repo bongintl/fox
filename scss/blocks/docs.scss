@@ -1,0 +1,100 @@
+.docs {
+    min-height: 65vh;
+    
+    &--centered {
+        h3, p {
+            @include medium {
+                padding: 0 30px;
+                text-align: center;
+            }
+        }
+        
+        h3 {
+            font-size: 24px;
+            margin-bottom: 1.5em;
+            @include medium {
+                font-size: 30px;
+            }
+        }
+        
+        p a:hover {
+            border-bottom: 1px solid black;
+        }
+    }
+    
+    &__nav {
+        column-count: 2;
+        width: 100%;
+
+        li {
+            display: block;
+            text-align: center;
+            margin-bottom: 0;
+        }
+    }
+    
+    .table {
+        margin-bottom: 2em;
+    }
+
+    &__heading {
+        // width: 80%;
+        // margin-left: 10%;
+        // padding-left: 30px;
+        // padding-right: 30px;
+        // margin-top: 60px;
+        // margin-bottom: 60px;
+        @include small {
+            padding: 60px 30px 0 30px;
+        }
+
+        @include medium {
+            margin-top: 80px;
+            margin-bottom: 80px;
+        }
+        @include large {
+            margin-top: 100px;
+            margin-bottom: 100px;
+        }
+        
+        &--nomargin {
+            // margin-bottom: 50px;
+            @include large {
+                margin-bottom: 0;
+            }
+        }
+            
+        @include medium {
+            font-size: 45px;
+        }
+    }
+    
+    &__intro {
+        display: none;
+
+        @include large {
+            display: block;
+        }
+    }
+    // @include small {
+    //     &__body {
+    //         padding-left: 30px;
+    //         padding-right: 30px;
+    //     }
+    // }
+    
+    @include small {
+        &__body--page {
+            h3, p {
+                margin-left: 30px;
+                margin-right: 30px;
+            }
+            
+            h1 {
+                padding: 60px 30px 60px 30px;
+            }
+        }
+    }
+
+
+}

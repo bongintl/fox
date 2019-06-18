@@ -1,0 +1,51 @@
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+[class*='col'] {
+    display: block;
+}
+
+@mixin column-widths ( $cls ) {
+    @for $i from 1 through $columns {
+        .#{ $cls }-#{ $i } {
+            width: 100% / $columns * $i;
+        }
+    }
+}
+
+@mixin column-offsets ( $cls ) {
+    @for $i from 0 through $columns - 1 {
+        .#{ $cls }-#{ $i } {
+            margin-left: 100% / $columns * $i;
+        }
+    }
+}
+
+@include column-widths( 's-col' );
+@include column-offsets( 's-off' );
+
+@include medium {
+    @include column-widths( 'm-col' );
+    @include column-offsets( 'm-off' );
+}
+
+@include large {
+    @include column-widths( 'l-col' );
+    @include column-offsets( 'l-off' );
+}
+
+.height-full {
+    height: calc( 100vh - #{ $nav-height-small } );
+    @include large {
+        height: calc( 100vh - #{ $nav-height-large } );
+    }
+}
+
+.height-half {
+    height: calc( 50vh - #{ $nav-height-small / 2 } );
+    @include large {
+        height: calc( 50vh - #{ $nav-height-large / 2 } );
+    }
+}

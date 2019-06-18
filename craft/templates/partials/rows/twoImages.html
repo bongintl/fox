@@ -1,0 +1,26 @@
+{% set capL = row.captionLeft %}
+{% set capR = row.captionRight %}
+
+<div class="row row__twoimages fade-in">
+
+{% for img in row.files %}
+
+    {% if loop.first %}
+        
+        <div class="s-col-12 m-col-6 l-col-4 l-off-2 row__twoimages--left">
+            <div class="row__bgimage" style="background-image: url('{{ img.url }}')"></div>
+            {% if capL %}<div class="row__caption">{{ capL }}</div>{% endif %}
+        </div>
+    
+    {% else %}
+    
+        <div class="s-col-12 m-col-6 l-col-4 row__twoimages--right">
+            <div class="row__bgimage" style="background-image: url('{{ img.url }}')"></div>
+            {% if capR %}<div class="row__caption">{{ capR }}</div>{% endif %}
+        </div>
+        
+    {% endif %}
+
+{% endfor %}
+
+</div>

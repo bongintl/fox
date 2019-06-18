@@ -1,0 +1,37 @@
+{% extends "_layout" %}
+
+{% block content %}
+    
+    {% set cat = entry.category.first() %}
+    
+    {% set title = cat ~ " " ~ entry.title %}
+    
+    {% include 'partials/sticky-header' with {
+        title: title,
+        assets: entry.headerImage | length > 0
+            ? [{ image: entry.headerImage.first, href: null }]
+            : []
+    } %}
+    
+    <!--<div class="row row--first fade-in">-->
+    <!--    <div class="s-col-12 m-col-4 m-off-4">-->
+    <!--        <h1>{{ cat }} {{ entry.title }}</h1>-->
+    <!--    </div>-->
+    <!--</div>-->
+    
+    <!--{% for img in entry.headerImage %}-->
+    <!--    <div class="row--margin fade-in">-->
+    <!--        <img src="{{ img.url }}" alt="">-->
+    <!--    </div>-->
+    <!--{% endfor %}-->
+    
+    <div class="row row--margin row--first row__intro fade-in">
+        <div class="s-col-12 l-col-6 l-off-3">
+            {{ entry.fullIntro }}
+        </div>
+    </div>
+    
+    {% include "partials/rows" with { rows : entry.rows } %}
+
+
+{% endblock %}

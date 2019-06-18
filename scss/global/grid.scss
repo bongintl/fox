@@ -1,0 +1,119 @@
+$portrait-ratio: 4/3;
+$landscape-ratio: 2/3;
+
+[class*='col'] {
+    display: block;
+}
+
+[class*='-h-'] {
+    overflow: hidden;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100vw;
+    align-items: start;
+    &--alternating:nth-child(odd) {
+        flex-direction: row-reverse;
+    }
+}
+
+@mixin grid ( $prefix ) {
+    @for $i from 1 through $columns {
+        $width: floor( 100vw / $columns * $i * 1000 ) / 1000;
+        .#{ $prefix }-col-#{ $i } {
+            width: $width;
+            &.#{ $prefix }-h-square {
+                height: $width;
+            }
+            &.#{ $prefix }-h-portrait {
+                height: $width * $portrait-ratio;
+            }
+            &.#{ $prefix }-h-landscape {
+                height: $width * $landscape-ratio;
+            }
+        }
+        .#{ $prefix }-off-#{ $i } {
+            margin-left: $width;
+        }
+    }
+}
+
+@include grid('s');
+.s-h-limit {
+    max-height: viewport-height-small();
+}
+
+@include medium {
+    @include grid('m');
+    .m-h-limit {
+        max-height: viewport-height-small();
+    }
+    .m-h-auto {
+        height: auto;
+    }
+}
+
+@include tablet-landscape {
+    @include grid('tl');
+    // .tl-h-limit {
+    //     max-height: viewport-height-small();
+    // }
+    // .tl-h-auto {
+    //     height: auto;
+    // }
+}
+
+@include large {
+    @include grid('l');
+    .l-h-limit {
+        max-height: viewport-height-large();
+    }
+    .l-h-auto {
+        height: auto;
+    }
+}
+
+// @mixin column-widths ( $cls ) {
+//     @for $i from 1 through $columns {
+//         .#{ $cls }-#{ $i } {
+//             width: 100% / $columns * $i;
+//         }
+//     }
+// }
+
+// @mixin column-offsets ( $cls ) {
+//     @for $i from 0 through $columns - 1 {
+//         .#{ $cls }-#{ $i } {
+//             margin-left: 100% / $columns * $i;
+//         }
+//     }
+// }
+
+// @include column-widths( 's-col' );
+// @include column-offsets( 's-off' );
+
+// @include medium {
+//     @include column-widths( 'm-col' );
+//     @include column-offsets( 'm-off' );
+// }
+
+// @include large {
+//     @include column-widths( 'l-col' );
+//     @include column-offsets( 'l-off' );
+// }
+
+// .height-full {
+//     height: calc( 100vh - #{ $nav-height-small } );
+//     @include large {
+//         height: calc( 100vh - #{ $nav-height-large } );
+//     }
+// }
+
+// .height-half {
+//     height: calc( 50vh - #{ $nav-height-small / 2 } );
+//     @include large {
+//         height: calc( 50vh - #{ $nav-height-large / 2 } );
+//     }
+// }

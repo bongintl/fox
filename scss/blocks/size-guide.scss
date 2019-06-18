@@ -1,0 +1,55 @@
+.size-guide {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparentize( $off-white, .2 );
+    display: flex;
+    z-index: 1000;
+    padding: 30px;
+    align-items: center;
+    justify-content: center;
+    font-size: $text-small;
+    @include medium {
+        font-size: 13px;
+    }
+    @include large {
+        font-size: 15px;
+    }
+    
+    opacity: 0;
+    transition: opacity 1s;
+    pointer-events: none;
+    &--open {
+        pointer-events: visible;
+        opacity: 1;
+    }
+    &__inner {
+        background: $off-white;
+        padding: 1.5rem;
+        width: 100%;
+        max-width: 20rem;
+    }
+    &__header {
+        text-transform: uppercase;
+        letter-spacing: .5px;
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 3rem;
+        align-items: center;
+        line-height: 1;
+    }
+    &__close {
+        cursor: pointer;
+    }
+    &__row {
+        width: 100%;
+        display: flex;
+        padding: 20px 0;
+        border-bottom: 1px solid black;
+    }
+    &__column {
+        width: 33.3%;
+    }
+}

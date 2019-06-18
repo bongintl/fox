@@ -1,0 +1,5 @@
+{% for row in rows %}
+
+    {% include ['partials/rows/' ~ row.type, '/partials/rows/missing' ] %}
+
+{% endfor %}

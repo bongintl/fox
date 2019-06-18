@@ -1,0 +1,9 @@
+.related-products {
+    & > *:nth-child( 3 ),
+    & > *:nth-child( 4 ) {
+        display: none;
+        @include tablet-landscape {
+            display: block;
+        }
+    }
+}

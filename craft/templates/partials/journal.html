@@ -1,0 +1,27 @@
+{% set orientation = orientation | default( 'portrait' ) %}
+<a class="journal {% if class is defined %}journal--{{ class }}{% endif %}" href="{{ entry.url }}">
+    {% set image = entry.thumbnail | length > 0 ? entry.thumbnail.first : entry.headerImage.first %}
+    {% set hasMobileImage = entry.thumbnailMobile | length > 0 %}
+    <div class="s-col-12 m-col-12 tl-col-6 l-col-6 s-h-{{ image is not null and image.width > image.height ? 'landscape' : 'portrait' }} tl-h-{{ orientation }} l-h-{{ orientation }} {% if hasMobileImage %}s-hide l-show{% endif %}">
+        {% if image %}
+            {{ img( image, [ 12, 6, 6 ], { class: 'background-image' } ) }}
+        {% endif %}
+    </div>
+    {% if hasMobileImage %}
+        <div class="s-col-12 m-col-12 tl-col-6 l-col-6 s-h-{{ image is not null and image.width > image.height ? 'landscape' : 'portrait' }} tl-h-{{ orientation }} l-h-{{ orientation }} l-hide">
+            {{ img( entry.thumbnailMobile.first, [ 12, 6, 6 ], { class: 'background-image' } ) }}
+        </div>
+    {% endif %}
+    <div class="s-col-12 m-col-12 tl-col-6 l-col-6 tl-h-{{ orientation }} l-h-{{ orientation }} {{ bem( 'journal__link', { 'has-intro': intro is defined } ) }}">
+        <span class="journal__date">{{ entry.postDate.format('F d') }}</span>
+    	<h4 class="journal__title">{{ entry.category.first() }} {{ entry.title | italicise_lowercase | raw }}</h4>
+    	{% if intro is defined %}
+        	<div class="journal__intro">
+        		{{ intro }}
+        	</div>
+        	<div class="journal__read-more">
+        		Read more
+        	</div>
+    	{% endif %}
+    </div>
+</a>

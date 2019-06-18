@@ -1,0 +1,270 @@
+.row {
+
+    .page & p {
+        margin-bottom: 30px;
+        &:not(:first-of-type) {
+            text-indent: 0;
+        }
+    }
+    
+    &--margin {
+        margin-bottom: 30px;
+        @include medium {
+            margin-bottom: 80px;
+        }
+    }
+    
+    &--first {
+        @include medium {
+            margin-top: 150px;
+            margin-bottom: 150px; 
+        }
+    }
+    
+    &__intro {
+        font-family: "orpheus-pro";
+        font-size: 21px;
+        padding: 0 30px;
+        line-height: 1.25;
+        margin: 60px 0;
+        
+        @include medium {
+            width: calc(100% - 256px);
+            padding: 0;
+            margin: 80px 128px;
+            font-size: 22px;
+            line-height: 1.25;
+        }
+        @include large {
+            width: 100%;
+            margin: 150px 0;
+            font-size: 30px;
+            margin-left: 0;
+        }
+       
+     
+        p {
+            &:not(:first-of-type) {
+                text-indent: 30px;
+            }
+        }
+    }
+    
+    &__text {
+        font-size: $text-small;
+        @include small {
+            padding: 0 30px;
+        }
+        @include medium {
+            line-height: 1.46;
+            width: calc(100% - 256px);
+            margin-left: 128px;
+        }
+        
+        @include large {
+            width: 100%;
+            font-size: $text-medium;
+            margin-left: 0;
+        }
+        p {
+            &:not(:first-of-type) {
+                text-indent: 30px;
+            }
+            
+            a {
+                border-bottom: 0;
+                &:hover {
+                    border-bottom: 1px solid black;
+                }
+            }
+        }
+        
+        
+        ul {
+            margin-left: 2rem;
+            li {
+        
+                &:before {
+                    content: "—";
+                    margin-left: -1.5em;
+                    margin-right: 10px;
+                }
+            }
+        }
+
+        ol {
+            margin-left: 3em;
+            list-style: none;
+            counter-reset: item;
+            
+            @include medium {
+                margin-left: 3em;
+                list-style: none;
+                counter-reset: item; 
+            }
+            
+            @include large {
+                margin-left: 3em;
+                list-style: none;
+                counter-reset: item;
+            }
+            
+            
+            li {
+                counter-increment: item;
+                &:before {
+                    position: absolute;
+                    content: counter(item);
+                    width: 1em;
+                    margin-left: -2.8em;
+                    margin-right: 2.5em;
+                        
+                    @include medium {
+                        width: 1em;
+                        margin-left: -3em;
+                        margin-right: 2.5em;
+                    }
+                    
+                    @include large {
+                        width: 1em;
+                        margin-left: -2.9em;
+                        margin-right: 2.3em;
+                    }
+                    
+                }
+            }
+        }
+        
+        
+    }
+
+    &__caption {
+        font-size: 13px;
+        padding: 10px 1em 0 1em;
+        
+        
+        @include medium {
+            padding: 1em 1em 1em 3em;
+        }
+        
+        @include large {
+            font-size: $text-small;
+        }
+    }
+    
+    &__credit {
+        font-size: $text-small;
+        text-align: center;
+        
+        @include small {
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-top: 2em;
+            padding-bottom: 2em;
+        }
+        
+        @include medium {
+            font-size: 13px;
+        }
+        
+        @include large {
+            margin-bottom: 150px;
+            font-size: 15px;
+        }
+    }
+    
+    &__image {
+        @include small {
+            padding: 0 30px;
+        }
+        
+        @include medium {
+            
+            
+            &--small {
+                width: 50%;
+                margin-left: 25%;
+            }
+            
+            &--medium {
+                width: calc(100% - 256px);
+                margin-left: 128px;
+            }
+            
+            &--large {
+                width: 100%;
+            }
+        }
+        
+        @include large {
+            width: 100%;
+            margin-left: 0;
+        }
+    }
+    
+    &__twoimages {
+        // & > div:first-child {
+        //     // margin-bottom: 30px;
+        // }
+        padding-left: 30px;
+        padding-right: 30px;
+        &--left, &--right {
+            padding-bottom: 30px;
+            @include medium {
+                padding-bottom: 80px;
+            }
+        }
+        @include medium {
+            &--left{
+                padding-right: 20px;
+                padding-left: 40px;
+                .row__caption {
+                    margin-bottom: 0;
+                }
+            }
+            &--right {
+                padding-left: 20px;
+                padding-right: 40px;
+            }
+        }
+        @include large {
+            &--left {
+                margin-right: 1em;
+                // padding: 0;
+            }
+            &--right {
+                margin-left: 1em;
+                // padding: 0;
+            }
+        }
+    }
+    
+    &__bgimage {
+        background-size: cover;
+        background-repeat: no-repeat;
+        
+        @include small {
+            height: 133.332vw;
+        }
+        
+        @include medium {
+            height: 55.55554vw;
+        }
+        
+        @include large {
+            height: 44.444vw;
+        }
+    }
+    
+    &__subheading {
+        text-align: center;
+        
+        h2 {
+            @include small {
+                font-size: 24px;
+            } 
+        }
+        
+    }
+
+}
